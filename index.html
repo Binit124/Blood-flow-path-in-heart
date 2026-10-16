@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Human Heart Blood Flow - Made by Binit</title>
+<style>
+body{font-family:Arial;background:#eaf4ff;color:#123;margin:0;text-align:center}
+header{background:#073b75;color:white;padding:15px}
+main{max-width:750px;margin:auto;padding:12px}
+.card{background:white;padding:12px;border-radius:15px}
+button{padding:12px;margin:4px;border:0;border-radius:8px;background:#0756a5;color:white;font-weight:bold}
+svg{width:100%;max-width:500px}
+text{font-family:Arial;font-size:12px;font-weight:bold}
+</style>
+</head>
+<body>
+<header>
+<h1>❤️ Human Heart Blood Flow</h1>
+<p>Interactive Science Project — Made by Binit</p>
+</header>
+<main><div class="card">
+<h2>Blood Circulation</h2>
+<p>🔵 Oxygen-poor blood | 🔴 Oxygen-rich blood</p>
+
+<svg viewBox="0 0 360 390">
+<defs>
+<marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#1685dc"/></marker>
+<marker id="r" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#e53935"/></marker>
+</defs>
+
+<!-- Lungs -->
+<path d="M125 50Q55 25 65 125Q70 155 130 125Z" fill="#f7a5ad" stroke="#b44"/>
+<path d="M235 50Q305 25 295 125Q290 155 230 125Z" fill="#f7a5ad" stroke="#b44"/>
+<text x="80" y="85">LUNGS</text><text x="245" y="85">LUNGS</text>
+
+<!-- Main vessels -->
+<path d="M140 205L95 205L95 115L115 95" stroke="#1685dc" stroke-width="14" fill="none" stroke-linecap="round"/>
+<path d="M160 180L120 140L105 110" stroke="#1685dc" stroke-width="10" fill="none"/>
+<path d="M200 180L245 140L260 110" stroke="#e53935" stroke-width="10" fill="none"/>
+<path d="M220 205L265 205L265 90Q265 35 220 35" stroke="#e53935" stroke-width="14" fill="none" stroke-linecap="round"/>
+
+<!-- Heart -->
+<path d="M180 145C145 105 105 145 125 185L180 275L235 185C255 145 215 105 180 145Z" fill="#efb3b9" stroke="#a52a42" stroke-width="3"/>
+<path d="M180 145L180 270" stroke="white" stroke-width="5"/>
+<path d="M130 175Q150 160 175 185L175 235L150 235Z" fill="#1685dc"/>
+<path d="M185 185Q210 160 230 175L210 235L185 235Z" fill="#e53935"/>
+<path d="M150 240L175 240L175 265L165 275Z" fill="#1685dc"/>
+<path d="M185 240L210 240L195 275L185 265Z" fill="#e53935"/>
+
+<!-- Labels -->
+<text x="3" y="185">Vena cava</text>
+<text x="8" y="200">🔵</text>
+<text x="3" y="310">Right atrium</text>
+<text x="210" y="310">Left atrium</text>
+<text x="5" y="330">Right ventricle</text>
+<text x="210" y="330">Left ventricle</text>
+<text x="215" y="20">Aorta 🔴</text>
+<text x="3" y="130">Pulmonary artery</text>
+<text x="235" y="130">Pulmonary veins</text>
+
+<!-- Moving blood cells -->
+<g fill="#087ce0" stroke="white" stroke-width="1">
+<circle r="6"><animateMotion dur="4s" repeatCount="indefinite" path="M95 115L95 205L140 205L155 235"/></circle>
+<circle r="6"><animateMotion dur="4s" begin="-1s" repeatCount="indefinite" path="M155 235L155 185L120 140L105 110"/></circle>
+<circle r="6"><animateMotion dur="4s" begin="-2s" repeatCount="indefinite" path="M105 110L120 140L160 180"/></circle>
+</g>
+<g fill="#f0182d" stroke="white" stroke-width="1">
+<circle r="6"><animateMotion dur="4s" repeatCount="indefinite" path="M260 110L245 140L200 180L200 235"/></circle>
+<circle r="6"><animateMotion dur="4s" begin="-1s" repeatCount="indefinite" path="M200 235L220 205L265 205L265 90L220 35"/></circle>
+<circle r="6"><animateMotion dur="4s" begin="-2s" repeatCount="indefinite" path="M220 35Q265 35 265 90"/></circle>
+</g>
+</svg>
+
+<div>
+<button onclick="start()">▶ Start</button>
+<button onclick="pause()">⏸ Pause</button>
+<button onclick="reset()">↺ Reset</button>
+<button onclick="explain()">📘 Explanation</button>
+</div>
+<p id="msg">Press Start to see animated blood cells.</p>
+</div></main>
+
+<script>
+const dots=[...document.querySelectorAll("animateMotion")];
+function start(){
+ dots.forEach(a=>a.parentElement.unpauseAnimations?.());
+ dots.forEach(a=>a.beginElement());
+ document.getElementById("msg").textContent="Blood is moving through the circulation diagram.";
+}
+function pause(){
+ dots.forEach(a=>a.parentElement.pauseAnimations?.());
+ document.querySelector("svg").pauseAnimations();
+ document.getElementById("msg").textContent="Animation paused. Press Start to resume.";
+}
+function reset(){
+ document.querySelector("svg").setCurrentTime(0);
+ document.getElementById("msg").textContent="Animation reset. Press Start to begin.";
+}
+function explain(){
+ document.getElementById("msg").innerHTML=
+ "<b>Blood flow sequence:</b><br>1. Superior and inferior vena cava<br>2. Right atrium<br>3. Right ventricle<br>4. Pulmonary artery<br>5. Lungs: blood receives oxygen<br>6. Pulmonary veins<br>7. Left atrium<br>8. Left ventricle<br>9. Aorta sends oxygen-rich blood to the body.";
+}
+</script>
+<footer><p>Made by Binit | Science Learning Project</p></footer>
+</body>
+</html>
